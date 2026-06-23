@@ -2,38 +2,115 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>تسجيل الدخول</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(135deg,#0b1220,#1e293b);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+color:white;
+}
+
+.box{
+background:rgba(255,255,255,0.06);
+backdrop-filter:blur(10px);
+padding:25px;
+border-radius:15px;
+width:320px;
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
+text-align:center;
+}
+
+h2{
+margin-bottom:15px;
+}
+
+input{
+width:90%;
+padding:12px;
+margin:8px 0;
+border:none;
+border-radius:10px;
+outline:none;
+background:rgba(255,255,255,0.1);
+color:white;
+}
+
+input::placeholder{
+color:#cbd5e1;
+}
+
+button{
+width:95%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:10px;
+background:#3b82f6;
+color:white;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+a{
+display:block;
+margin-top:10px;
+color:#60a5fa;
+text-decoration:none;
+font-size:14px;
+}
+
+small{
+opacity:0.7;
+}
+</style>
 </head>
 
-<body style="font-family:Arial;text-align:center;margin-top:60px">
+<body>
 
-<h2>تسجيل الدخول</h2>
+<div class="box">
 
-<input id="username" placeholder="اسم المستخدم"><br><br>
-<input id="password" type="password" placeholder="كلمة المرور"><br><br>
+<h2>🏦 تسجيل الدخول</h2>
+
+<input id="username" placeholder="اسم المستخدم">
+<input id="password" type="password" placeholder="كلمة المرور">
 
 <button onclick="login()">دخول</button>
 
+<a href="register.html">ليس لديك حساب؟ إنشاء حساب</a>
+
 <p id="msg"></p>
+
+</div>
 
 <script>
 function login(){
 
 let users = JSON.parse(localStorage.getItem("users")) || [];
 
-let user = users.find(u =>
-u.username === document.getElementById("username").value &&
-u.password === document.getElementById("password").value
-);
+let u = document.getElementById("username").value;
+let p = document.getElementById("password").value;
+
+let user = users.find(x => x.username === u && x.password === p);
 
 if(!user){
-document.getElementById("msg").innerText = "بيانات خاطئة";
+document.getElementById("msg").innerText="❌ خطأ في البيانات";
 return;
 }
 
 localStorage.setItem("currentUser", JSON.stringify(user));
-
-window.location.href = "home.html";
+window.location.href="home.html";
 }
 </script>
 
