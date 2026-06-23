@@ -3,116 +3,84 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>تسجيل الدخول</title>
+<title>OnlineNet Bank - تسجيل الدخول</title>
 
 <style>
-body{
-margin:0;
-font-family:Arial;
-background:linear-gradient(135deg,#0b1220,#1e293b);
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-color:white;
+body {
+margin: 0;
+font-family: Arial;
+background: linear-gradient(135deg,#0f172a,#1e1b4b,#0f172a);
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
 }
 
-.box{
-background:rgba(255,255,255,0.06);
-backdrop-filter:blur(10px);
-padding:25px;
-border-radius:15px;
-width:320px;
-box-shadow:0 10px 30px rgba(0,0,0,0.4);
-text-align:center;
+.box {
+background: rgba(255,255,255,0.08);
+backdrop-filter: blur(10px);
+padding: 30px;
+border-radius: 20px;
+width: 320px;
+box-shadow: 0 0 25px rgba(0,0,0,0.4);
+color: white;
 }
 
-h2{
-margin-bottom:15px;
+h2 {
+text-align: center;
+margin-bottom: 20px;
 }
 
-input{
-width:90%;
-padding:12px;
-margin:8px 0;
-border:none;
-border-radius:10px;
-outline:none;
-background:rgba(255,255,255,0.1);
-color:white;
+input {
+width: 100%;
+padding: 12px;
+margin: 10px 0;
+border: none;
+border-radius: 10px;
+outline: none;
 }
 
-input::placeholder{
-color:#cbd5e1;
+button {
+width: 100%;
+padding: 12px;
+border: none;
+border-radius: 10px;
+background: #3b82f6;
+color: white;
+font-weight: bold;
+cursor: pointer;
+transition: 0.3s;
 }
 
-button{
-width:95%;
-padding:12px;
-margin-top:10px;
-border:none;
-border-radius:10px;
-background:#3b82f6;
-color:white;
-font-weight:bold;
-cursor:pointer;
-transition:0.3s;
+button:hover {
+background: #2563eb;
+transform: scale(1.03);
 }
 
-button:hover{
-transform:scale(1.05);
-}
-
-a{
-display:block;
-margin-top:10px;
-color:#60a5fa;
-text-decoration:none;
-font-size:14px;
-}
-
-small{
-opacity:0.7;
+a {
+color: #93c5fd;
+text-decoration: none;
+font-size: 14px;
+display: block;
+text-align: center;
+margin-top: 10px;
 }
 </style>
+
 </head>
 
 <body>
 
 <div class="box">
+<h2>تسجيل الدخول</h2>
 
-<h2>🏦 تسجيل الدخول</h2>
+<input type="text" placeholder="اسم المستخدم">
+<input type="password" placeholder="كلمة المرور">
 
-<input id="username" placeholder="اسم المستخدم">
-<input id="password" type="password" placeholder="كلمة المرور">
+<button>دخول</button>
 
-<button onclick="login()">دخول</button>
-
-<a href="register.html">ليس لديك حساب؟ إنشاء حساب</a>
-
-<p id="msg"></p>
-
+<a href="register.html">إنشاء حساب جديد</a>
 </div>
-
-<script>
-function login(){
-
-let users = JSON.parse(localStorage.getItem("users")) || [];
-
-let u = document.getElementById("username").value;
-let p = document.getElementById("password").value;
-
-let user = users.find(x => x.username === u && x.password === p);
-
-if(!user){
-document.getElementById("msg").innerText="❌ خطأ في البيانات";
-return;
-}
-
-localStorage.setItem("currentUser", JSON.stringify(user));
-window.location.href="home.html";
-}
-</script>
 
 </body>
 </html>
