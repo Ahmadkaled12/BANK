@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard</title>
+</head>
+
+<body style="font-family:Arial;text-align:center;margin-top:50px">
+
+<h2>🏦 لوحة البنك</h2>
+
+<h3 id="user"></h3>
+<h1 id="balance"></h1>
+
+<input id="toUser" placeholder="المستلم"><br><br>
+<input id="amount" type="number" placeholder="المبلغ"><br><br>
+
+<button onclick="transfer()">تحويل</button>
+<button onclick="logout()">خروج</button>
+
+<p id="msg"></p>
+
+<script>
+
+let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+let users = JSON.parse(localStorage.getItem("users")) || [];
+
+if(!currentUser){
+window.location.href="login.html";
+}
+
+document.getElementById("user").innerText = currentUser.username;
+document.getElementById("balance").innerText = currentUser.balance + " $";
+
+function transfer(){
+
+let to = document.getElementById("toUser").value;
+let amount = Number(document.getElementById("amount").value);
+
+if(amount > currentUser.balance){
+document.getElementById("msg").innerText = "رصيد غير كافي";
+return;
+}
+
+let receiver = users.find(u => u.username === to);
+
+if(!receiver){
+document.getElementById("msg").innerText = "المستخدم غير موجود";
+return;
+}
+
+users.forEach(u=>{
+if(u.username === currentUser.username){
+u.balance -= amount;
+currentUser.balance -= amount;
+}
+});
+
+receiver.balance += amount;
+
+localStorage.setItem("users", JSON.stringify(users));
+localStorage.setItem("currentUser", JSON.stringify(currentUser));
+
+document.getElementById("balance").innerText = currentUser.balance + " $";
+
+document.getElementById("msg").innerText = "تم التحويل";
+
+}
+
+function logout(){
+localStorage.removeItem("currentUser");
+window.location.href="login.html";
+}
+
+</script>
+
+</body>
+</html>
