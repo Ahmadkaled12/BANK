@@ -3,67 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <title>إنشاء حساب</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background: linear-gradient(135deg,#020617,#1e293b);
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.box{
+background: rgba(255,255,255,0.1);
+backdrop-filter: blur(12px);
+padding:30px;
+border-radius:20px;
+width:320px;
+color:white;
+}
+
+input{
+width:100%;
+padding:12px;
+margin:8px 0;
+border:none;
+border-radius:10px;
+}
+
+button{
+width:100%;
+padding:12px;
+border:none;
+border-radius:10px;
+background:#22c55e;
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+background:#16a34a;
+}
+</style>
+
 </head>
 
-<body style="font-family:Arial;text-align:center;margin-top:60px">
+<body>
 
-<h2>إنشاء حساب جديد 🟢</h2>
+<div class="box">
+<h2>إنشاء حساب</h2>
 
-<input id="username" placeholder="اسم المستخدم"><br><br>
-<input id="email" placeholder="البريد الإلكتروني"><br><br>
-<input id="password" type="password" placeholder="كلمة المرور"><br><br>
+<input type="text" placeholder="الاسم">
+<input type="email" placeholder="البريد الإلكتروني">
+<input type="password" placeholder="كلمة المرور">
 
-<button onclick="register()">إنشاء الحساب</button>
-
-<p id="msg"></p>
-
-<script>
-function register(){
-
-let username = document.getElementById("username").value.trim();
-let email = document.getElementById("email").value.trim();
-let password = document.getElementById("password").value.trim();
-
-let msg = document.getElementById("msg");
-
-// 🔴 تحقق من الإدخال
-if(!username || !email || !password){
-msg.innerText = "⚠️ يرجى ملء جميع الحقول";
-return;
-}
-
-// 🔵 جلب المستخدمين
-let users = JSON.parse(localStorage.getItem("users")) || [];
-
-// 🔴 منع تكرار الاسم
-let exists = users.find(u => u.username === username);
-
-if(exists){
-msg.innerText = "❌ اسم المستخدم موجود مسبقًا";
-return;
-}
-
-// 🟢 إنشاء المستخدم
-let newUser = {
-username: username,
-email: email,
-password: password,
-balance: 1000
-};
-
-users.push(newUser);
-
-// 🟢 حفظ آمن
-localStorage.setItem("users", JSON.stringify(users));
-
-msg.innerText = "✅ تم إنشاء الحساب بنجاح";
-
-setTimeout(()=>{
-window.location.href = "login.html";
-},1000);
-
-}
-</script>
+<button>تسجيل</button>
+</div>
 
 </body>
 </html>
