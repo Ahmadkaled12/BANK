@@ -39,3 +39,4 @@ window.loginUser = async function(email, password){
   localStorage.setItem("uid", user.user.uid);
   window.location.href = "dashboard.html";
 }
+dart pub global activate flutterfire_cli
