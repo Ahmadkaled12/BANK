@@ -67,5 +67,20 @@ function register(){
 }
 </script>
   <script type="module" src="firebase.js"></script>
+  <input id="email" placeholder="البريد">
+<input id="pass" placeholder="كلمة المرور">
+
+<button onclick="doRegister()">تسجيل</button>
+
+<script type="module">
+import "./firebase.js";
+
+window.doRegister = function(){
+  let email = document.getElementById("email").value;
+  let pass = document.getElementById("pass").value;
+
+  registerUser(email, pass);
+}
+</script>
 </body>
 </html>
