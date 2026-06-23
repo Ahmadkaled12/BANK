@@ -2,23 +2,19 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>Admin Panel</title>
+<title>Admin</title>
 </head>
 
 <body>
 
-<h1>لوحة التحكم - الأدمن</h1>
+<h1>لوحة التحكم</h1>
 
 <div id="users"></div>
 
 <script type="module">
 import { db } from "./firebase.js";
 import {
-collection,
-getDocs,
-updateDoc,
-doc,
-deleteDoc
+collection, getDocs, updateDoc, doc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 async function loadUsers(){
@@ -32,10 +28,9 @@ const data = u.data();
 html += `
 <div style="border:1px solid #ccc;padding:10px;margin:10px">
 <p>${data.email}</p>
-<p>Balance: ${data.balance}</p>
+<p>${data.balance}</p>
 
-<button onclick="addMoney('${u.id}')">+100</button>
-<button onclick="remove('${u.id}')">حذف</button>
+<button onclick="add('${u.id}')">+100</button>
 </div>
 `;
 });
@@ -43,20 +38,14 @@ html += `
 document.getElementById("users").innerHTML = html;
 }
 
-window.addMoney = async function(id){
+window.add = async function(id){
 const ref = doc(db,"users",id);
 const snap = await getDoc(ref);
-const bal = snap.data().balance;
 
 await updateDoc(ref,{
-balance: bal + 100
+balance: snap.data().balance + 100
 });
 
-loadUsers();
-}
-
-window.remove = async function(id){
-await deleteDoc(doc(db,"users",id));
 loadUsers();
 }
 
