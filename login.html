@@ -95,5 +95,20 @@ function login(){
   window.location.href = "dashboard.html";
 }
 </script>
+  <input id="email" placeholder="البريد">
+<input id="pass" placeholder="كلمة المرور">
+
+<button onclick="doLogin()">دخول</button>
+
+<script type="module">
+import "./firebase.js";
+
+window.doLogin = function(){
+  let email = document.getElementById("email").value;
+  let pass = document.getElementById("pass").value;
+
+  loginUser(email, pass);
+}
+</script>
 </body>
 </html>
