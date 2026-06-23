@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>تسجيل الدخول</title>
+</head>
+
+<body style="font-family:Arial;text-align:center;margin-top:60px">
+
+<h2>تسجيل الدخول</h2>
+
+<input id="username" placeholder="اسم المستخدم"><br><br>
+<input id="password" type="password" placeholder="كلمة المرور"><br><br>
+
+<button onclick="login()">دخول</button>
+
+<p id="msg"></p>
+
+<script>
+function login(){
+
+let users = JSON.parse(localStorage.getItem("users")) || [];
+
+let user = users.find(u =>
+u.username === document.getElementById("username").value &&
+u.password === document.getElementById("password").value
+);
+
+if(!user){
+document.getElementById("msg").innerText = "بيانات خاطئة";
+return;
+}
+
+localStorage.setItem("currentUser", JSON.stringify(user));
+
+window.location.href = "home.html";
+}
+</script>
+
+</body>
+</html>
